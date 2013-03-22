@@ -14,7 +14,7 @@ namespace NPoco.Tests.Common
         public int Key2ID { get; set; }
 
         [Column("Key3ID")]
-        public int Key3ID { get; set; }
+        public int? Key3ID { get; set; }
 
         [Column("TextData")]
         public string TextData { get; set; }

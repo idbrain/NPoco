@@ -106,7 +106,7 @@ namespace NPoco.Tests.Common
                 CREATE TABLE CompositeObjects(
                     Key1ID int PRIMARY KEY NOT NULL, 
                     Key2ID int NOT NULL, 
-                    Key3ID int NOT NULL, 
+                    Key3ID int NULL, 
                     TextData nvarchar(512) NULL, 
                     DateEntered datetime NOT NULL,
                     DateUpdated datetime NULL 
