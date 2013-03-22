@@ -5,3 +5,5 @@ obj
 *.nupkg
 *.user
 _ReSharper*
+*.ncrunch
+*.ncrunchsolution
