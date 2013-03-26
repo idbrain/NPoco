@@ -108,7 +108,7 @@ namespace NPoco.Tests.DecoratedTests.QueryTests
             Assert.AreEqual("Name2", data[0][0]);
             Assert.AreEqual("test", data[0][1]);
         }
-        
+
         [Test]
         public void ReturnDictionaryStringObject()
         {

@@ -1534,7 +1534,7 @@ namespace NPoco
             }
             set { _pocoDataFactory = value; }
         }
-        
+
         // Member variables
         private readonly string _connectionString;
         private readonly string _providerName;

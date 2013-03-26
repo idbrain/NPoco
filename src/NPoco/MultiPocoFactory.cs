@@ -52,7 +52,7 @@ namespace NPoco
         public static Delegate GetAutoMapper(Type[] types)
         {
             // Build a key
-            var key = string.Join(":", types.Select(x=>x.ToString()).ToArray());
+            var key = string.Join(":", types.Select(x => x.ToString()).ToArray());
 
             return AutoMappers.Get(key, () =>
             {
@@ -92,7 +92,7 @@ namespace NPoco
             });
         }
 
-         // Find the split point in a result set for two different pocos and return the poco factory for the first
+        // Find the split point in a result set for two different pocos and return the poco factory for the first
         static Delegate FindSplitPoint(Database database, Type typeThis, Type typeNext, string sql, string connectionString, IDataReader r, ref int pos)
         {
             // Last?
@@ -162,5 +162,5 @@ namespace NPoco
         }
     }
 
-       
+
 }

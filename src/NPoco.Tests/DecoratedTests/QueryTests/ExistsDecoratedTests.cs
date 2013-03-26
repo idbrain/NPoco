@@ -31,10 +31,10 @@ namespace NPoco.Tests.DecoratedTests.QueryTests
         [Test]
         public void ExistsByCompositeId()
         {
-            var composite = Database.SingleById<CompositeObjectDecorated>(new {InMemoryCompositeObjects[1].Key1ID, InMemoryCompositeObjects[1].Key2ID, InMemoryCompositeObjects[1].Key3ID });
+            var composite = Database.SingleById<CompositeObjectDecorated>(new { InMemoryCompositeObjects[1].Key1ID, InMemoryCompositeObjects[1].Key2ID, InMemoryCompositeObjects[1].Key3ID });
             Assert.IsNotNull(composite);
 
-            var exists = Database.Exists<CompositeObjectDecorated>(new {InMemoryCompositeObjects[1].Key1ID, InMemoryCompositeObjects[1].Key2ID, InMemoryCompositeObjects[1].Key3ID });
+            var exists = Database.Exists<CompositeObjectDecorated>(new { InMemoryCompositeObjects[1].Key1ID, InMemoryCompositeObjects[1].Key2ID, InMemoryCompositeObjects[1].Key3ID });
             Assert.IsTrue(exists);
         }
 

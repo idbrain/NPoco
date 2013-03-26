@@ -21,7 +21,7 @@ namespace NPoco.Tests.Common
             dbFactory.Config().WithFluentConfig(
                 FluentMappingConfiguration.Scan(s =>
                 {
-                    s.Assembly(typeof (User).Assembly);
+                    s.Assembly(typeof(User).Assembly);
                     s.IncludeTypes(types.Contains);
                     s.WithSmartConventions();
                 })

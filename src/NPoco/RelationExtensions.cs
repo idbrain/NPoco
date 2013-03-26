@@ -23,17 +23,17 @@ namespace NPoco
         {
             return db.FetchOneToMany<T, T1>(key, new Sql(sql, args));
         }
-        
+
         public static List<T> FetchOneToMany<T, T1>(this IDatabase db, Func<T, object> key, Func<T1, object> manyKey, string sql, params object[] args)
         {
             return db.FetchOneToMany<T, T1>(key, manyKey, new Sql(sql, args));
-        }     
+        }
     }
 
     public class Relator
     {
         private PropertyInfo property1;
-        
+
         public T OneToMany<T, TSub>(T main, TSub sub, Func<T, object> idFunc)
         {
             return OneToMany(main, sub, idFunc, null);
@@ -69,10 +69,10 @@ namespace NPoco
             }
 
             var prev = (T)onetomanycurrent;
-            onetomanycurrent = main; 
+            onetomanycurrent = main;
 
             bool nullMany = subIdFunc != null && subIdFunc(sub).Equals(GetDefault(subIdFunc(sub).GetType()));
-            property1.SetValue((T) onetomanycurrent, nullMany ? new List<TSub>() : new List<TSub> {sub}, null);
+            property1.SetValue((T)onetomanycurrent, nullMany ? new List<TSub>() : new List<TSub> { sub }, null);
 
             return prev;
         }

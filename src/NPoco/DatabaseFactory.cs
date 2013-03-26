@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
 using NPoco.FluentMappings;
 
 namespace NPoco
@@ -35,7 +31,7 @@ namespace NPoco
 
             var db = _options.Database();
             Build(db);
-            return db; 
+            return db;
         }
     }
 
@@ -49,12 +45,12 @@ namespace NPoco
     public class DatabaseFactoryConfig
     {
         private readonly DatabaseFactoryConfigOptions _options;
-        
+
         public DatabaseFactoryConfig(DatabaseFactoryConfigOptions options)
         {
             _options = options;
         }
-        
+
         public DatabaseFactoryConfig UsingDatabase(Func<Database> database)
         {
             _options.Database = database;

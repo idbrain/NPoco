@@ -60,7 +60,7 @@ namespace NPoco.Tests.Common
             InMemoryUsers = new List<UserDecorated>();
             InMemoryExtraUserInfos = new List<ExtraUserInfoDecorated>();
             InMemoryCompositeObjects = new List<CompositeObjectDecorated>();
-            
+
             for (var i = 0; i < 15; i++)
             {
                 var pos = i + 1;
@@ -106,7 +106,7 @@ namespace NPoco.Tests.Common
             var userExtraInfoCount = Database.ExecuteScalar<int>("SELECT COUNT(ExtraUserInfoId) FROM ExtraUserInfos");
             Assert.AreEqual(InMemoryExtraUserInfos.Count, userExtraInfoCount, "Test User Extra Info Data not in sync db has " + userExtraInfoCount + " records, but the in memory copy has only " + InMemoryExtraUserInfos.Count + " records.");
             System.Diagnostics.Debug.WriteLine("Created " + userExtraInfoCount + " test extra user info records for the unit tests.");
-            
+
             var compositeObjectCount = Database.ExecuteScalar<int>("SELECT COUNT(Key1ID) FROM CompositeObjects");
             Assert.AreEqual(InMemoryCompositeObjects.Count, compositeObjectCount, "Test Composite Object Data not in sync db has " + compositeObjectCount + " records, but the in memory copy has only " + InMemoryCompositeObjects.Count + " records.");
             System.Diagnostics.Debug.WriteLine("Created " + compositeObjectCount + " test composite PK objects for the unit tests.");
