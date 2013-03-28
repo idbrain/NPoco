@@ -47,6 +47,10 @@
 *.hs text eol=crlf
 *.config text eol=crlf
 
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.psm1 text eol=crlf
+
 *.csproj text eol=crlf merge=union 
 *.vbproj text eol=crlf merge=union 
 *.fsproj text eol=crlf merge=union 
