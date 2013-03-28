@@ -19,7 +19,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using NPoco.Expressions;
 
 namespace NPoco
 {
@@ -167,7 +169,7 @@ namespace NPoco
         // Automatically close connection
         public void Dispose()
         {
-            if (KeepConnectionAlive) return;
+            if (KeepConnectionAlive) return; 
             CloseSharedConnection();
         }
 
@@ -582,6 +584,20 @@ namespace NPoco
             return Fetch<T>("");
         }
 
+        public List<T> FetchWhere<T>(Expression<Func<T, bool>> expression)
+        {
+            var ev = _dbType.ExpressionVisitor<T>(this, PocoData.ForType(typeof(T), PocoDataFactory));
+            var sql = ev.Where(expression).ToWhereStatement();
+            return Fetch<T>(sql, ev.Params.ToArray());
+        }
+
+        public List<T> FetchBy<T>(Func<SqlExpressionVisitor<T>, SqlExpressionVisitor<T>> expression)
+        {
+            var ev = _dbType.ExpressionVisitor<T>(this, PocoData.ForType(typeof(T), PocoDataFactory));
+            var sql = expression(ev).ToSelectStatement();
+            return Fetch<T>(sql, ev.Params.ToArray());
+        }
+
         public void BuildPageQueries<T>(long skip, long take, string sql, ref object[] args, out string sqlCount, out string sqlPage)
         {
             // Add auto select clause
@@ -606,7 +622,7 @@ namespace NPoco
             BuildPageQueries<T>(offset, itemsPerPage, sql, ref args, out sqlCount, out sqlPage);
 
             // Save the one-time command time out and use it for both queries
-            var saveTimeout = OneTimeCommandTimeout;
+            int saveTimeout = OneTimeCommandTimeout;
 
             // Setup the paged result
             var result = new Page<T>();
@@ -1091,7 +1107,7 @@ namespace NPoco
                     rawvalues.Add(val);
                 }
 
-                string sql;
+                var sql = string.Empty;
                 var outputClause = String.Empty;
                 if (autoIncrement)
                 {
@@ -1534,7 +1550,7 @@ namespace NPoco
             }
             set { _pocoDataFactory = value; }
         }
-
+        
         // Member variables
         private readonly string _connectionString;
         private readonly string _providerName;
@@ -1546,14 +1562,6 @@ namespace NPoco
         private object[] _lastArgs;
         private string _paramPrefix = "@";
         private VersionExceptionHandling _versionException = VersionExceptionHandling.Ignore;
-
-        internal IDataReader ExecuteReaderHelper(IDbCommand cmd)
-        {
-            DoPreExecute(cmd);
-            var result = cmd.ExecuteReader();
-            OnExecutedCommand(cmd);
-            return result;
-        }
 
         internal int ExecuteNonQueryHelper(IDbCommand cmd)
         {
@@ -1567,6 +1575,14 @@ namespace NPoco
         {
             DoPreExecute(cmd);
             object r = cmd.ExecuteScalar();
+            OnExecutedCommand(cmd);
+            return r;
+        }
+
+        internal IDataReader ExecuteReaderHelper(IDbCommand cmd)
+        {
+            DoPreExecute(cmd);
+            IDataReader r = cmd.ExecuteReader();
             OnExecutedCommand(cmd);
             return r;
         }

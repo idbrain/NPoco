@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NPoco
 {
-#if POCO_NO_DYNAMIC
+    #if POCO_NO_DYNAMIC
     public class Tuple<T1, T2>
     {
         public T1 Item1 { get; set; }
@@ -32,5 +32,5 @@ namespace NPoco
         public Tuple(T1 item1, T2 item2, T3 item3, T4 item4) { Item1 = item1; Item2 = item2; Item3 = item3; Item4 = item4; }
         public Tuple() { }
     }
-#endif
+    #endif
 }

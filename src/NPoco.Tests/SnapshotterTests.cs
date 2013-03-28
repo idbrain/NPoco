@@ -20,7 +20,7 @@ namespace NPoco.Tests
                 .Config()
                 .UsingDatabase(() => new Database(""))
                 .WithFluentConfig(FluentMappingConfiguration.Configure(new MyMappings()));
-
+            
             _database = dbfactory.GetDatabase();
         }
 

@@ -46,7 +46,7 @@ namespace NPoco.Tests.DecoratedTests
             {
                 using (var scope2 = Database.GetTransaction())
                 {
-
+                    
 
                     var user1 = new UserDecorated
                     {
@@ -87,7 +87,7 @@ namespace NPoco.Tests.DecoratedTests
                 InMemoryExtraUserInfos.Add(extra);
                 Database.Insert(extra);
 
-
+                
 
                 //scope.Complete();
             }
@@ -140,7 +140,7 @@ namespace NPoco.Tests.DecoratedTests
                     };
                     InMemoryExtraUserInfos.Add(extra1);
                     Database.Insert(extra1);
-
+                    
                     scope2.Complete();
                 }
 

@@ -70,7 +70,8 @@ namespace NPoco.Tests.Common
                     Name = "Name" + pos,
                     Age = 20 + pos,
                     DateOfBirth = new DateTime(1970, 1, 1).AddYears(pos),
-                    Savings = 50.00m + (1.01m * pos)
+                    Savings = 50.00m + (1.01m * pos),
+                    IsMale = (i % 2 == 0)
                 };
                 Database.Insert(user);
                 Assert.IsTrue(user.UserId > 0, "Failed to save User #" + pos);

@@ -54,7 +54,7 @@ namespace NPoco.Tests
             db.OpenSharedConnection();
             Assert.IsNotNull(db.Connection);
             Assert.IsTrue(db.Connection.State == ConnectionState.Open);
-            Assert.AreEqual(typeof(SqlServerDatabaseType), db.DatabaseType.GetType());
+            Assert.AreEqual(typeof (SqlServerDatabaseType), db.DatabaseType.GetType());
 
             // Constructors using a Connection do not close the connection on close/displose
             db.CloseSharedConnection();

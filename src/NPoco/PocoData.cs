@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Text;
 
 namespace NPoco
 {
@@ -43,7 +44,7 @@ namespace NPoco
             if (t == typeof(System.Dynamic.ExpandoObject))
                 throw new InvalidOperationException("Can't use dynamic types with this method");
 #endif
-
+            
             var pd = _pocoDatas.Get(t, () => factory(t));
             return pd;
         }
@@ -108,7 +109,7 @@ namespace NPoco
         {
             // Check cache
             var key = string.Format("{0}:{1}:{2}:{3}:{4}", sql, connString, firstColumn, countColumns, instance != GetDefault(type));
-
+ 
             Func<Delegate> createFactory = () =>
             {
                 // Create the method
@@ -249,7 +250,7 @@ namespace NPoco
                             il.Emit(OpCodes.Ldc_I4, i - firstColumn);                       // arr,arr,value,i
                             il.Emit(OpCodes.Callvirt, valueset);                            // arr
 
-                            il.MarkLabel(lblNext);
+                            il.MarkLabel(lblNext);                  
                         }
 
                         il.Emit(OpCodes.Castclass, type);

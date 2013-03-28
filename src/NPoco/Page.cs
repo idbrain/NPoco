@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace NPoco
 {
-    public class Page<T>
+    public class Page<T> 
     {
         public long CurrentPage { get; set; }
         public long TotalPages { get; set; }
