@@ -574,6 +574,11 @@ namespace NPoco
             return Fetch<T>(new Sql(sql, args));
         }
 
+        public List<T> FetchUsingTempTable<T>(string sql, params object[] args)
+        {
+            return QueryUsingTempTable<T>(default(T), sql, args).ToList();
+        }
+
         public List<T> Fetch<T>(Sql sql)
         {
             return Query<T>(sql).ToList();
@@ -715,6 +720,46 @@ namespace NPoco
         public IEnumerable<T> Query<T>(Sql Sql)
         {
             return Query(default(T), Sql);
+        }
+
+        private IEnumerable<T> QueryUsingTempTable<T>(T instance, string sql, params object[] args)
+        {
+            OpenSharedConnection();
+            using (var cmd = CreateCommand(_sharedConnection, sql, args))
+            {
+                IDataReader r;
+                var pd = PocoData.ForType(typeof(T), PocoDataFactory);
+                try
+                {
+                    r = ExecuteReaderHelper(cmd);
+                }
+                catch (Exception x)
+                {
+                    OnException(x);
+                    throw;
+                }
+
+                using (r)
+                {
+                    var factory = pd.GetFactory(cmd.CommandText, _sharedConnection.ConnectionString, 0, r.FieldCount, r, instance) as Func<IDataReader, T, T>;
+                    while (true)
+                    {
+                        T poco;
+                        try
+                        {
+                            if (!r.Read()) yield break;
+                            poco = factory(r, instance);
+                        }
+                        catch (Exception x)
+                        {
+                            OnException(x);
+                            throw;
+                        }
+
+                        yield return poco;
+                    }
+                }
+            }
         }
 
         private IEnumerable<T> Query<T>(T instance, Sql Sql)

@@ -19,5 +19,29 @@ namespace NPoco.Tests.DecoratedTests.QueryTests
             Assert.AreEqual(InMemoryExtraUserInfos[0].Email, user.ExtraUserInfo.Email);
             Assert.AreEqual(InMemoryExtraUserInfos[0].Children, user.ExtraUserInfo.Children);
         }
+
+        [Test]
+        public void FetchFromTempTable()
+        {
+            const string sql = @"
+                DECLARE @t AS TABLE (
+	                UserID int,
+	                Age int
+                )
+
+                INSERT INTO @t
+                SELECT Users.UserID,
+                       SUM(Users.Age + Users.UserID)
+                FROM Users
+                WHERE Users.UserID >= 10
+                GROUP BY Users.UserID
+
+                SELECT * FROM @t
+            ";
+
+            var list = Database.FetchUsingTempTable<UserDecorated>(sql);
+            Assert.IsNotNull(list);
+            Assert.IsTrue(list.Count > 0);
+        }
     }
 }

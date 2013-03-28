@@ -1,49 +1,52 @@
-*.doc  diff=astextplain
-*.DOC	diff=astextplain
-*.docx	diff=astextplain
-*.DOCX	diff=astextplain
-*.dot	diff=astextplain
-*.DOT	diff=astextplain
-*.pdf	diff=astextplain
-*.PDF	diff=astextplain
-*.rtf	diff=astextplain
-*.RTF	diff=astextplain
+# See https://help.github.com/articles/dealing-with-line-endings
+* text eol=crlf
 
-*.jpg  	binary
-*.png 	binary
-*.gif 	binary
+*.doc diff=astextplain 
+*.DOC diff=astextplain
+*.docx diff=astextplain
+*.DOCX diff=astextplain
+*.dot diff=astextplain
+*.DOT diff=astextplain
+*.pdf diff=astextplain
+*.PDF diff=astextplain
+*.rtf diff=astextplain
+*.RTF diff=astextplain
 
-*.cs -text diff=csharp 
-*.vb -text
-*.c -text
-*.cpp -text
-*.cxx -text
-*.h -text
-*.hxx -text
-*.py -text
-*.rb -text
-*.java -text
-*.html -text
-*.htm -text
-*.css -text
-*.scss -text
-*.sass -text
-*.less -text
-*.js -text
-*.lisp -text
-*.clj -text
-*.sql -text
-*.php -text
-*.lua -text
-*.m -text
-*.asm -text
-*.erl -text
-*.fs -text
-*.fsx -text
-*.hs -text
+*.jpg binary
+*.png binary
+*.gif binary
 
-*.csproj -text merge=union 
-*.vbproj -text merge=union 
-*.fsproj -text merge=union 
-*.dbproj -text merge=union 
-*.sln -text merge=union 
+*.cs text eol=crlf diff=csharp
+*.vb text eol=crlf 
+*.c text eol=crlf
+*.cpp text eol=crlf
+*.cxx text eol=crlf
+*.h text eol=crlf
+*.hxx text eol=crlf
+*.py text eol=crlf
+*.rb text eol=crlf
+*.java text eol=crlf
+*.html text eol=crlf
+*.htm text eol=crlf
+*.css text eol=crlf
+*.scss text eol=crlf
+*.sass text eol=crlf
+*.less text eol=crlf
+*.js text eol=crlf
+*.lisp text eol=crlf
+*.clj text eol=crlf
+*.sql text eol=crlf
+*.php text eol=crlf
+*.lua text eol=crlf
+*.m text eol=crlf
+*.asm text eol=crlf
+*.erl text eol=crlf
+*.fs text eol=crlf
+*.fsx text eol=crlf
+*.hs text eol=crlf
+
+*.csproj text eol=crlf merge=union 
+*.vbproj text eol=crlf merge=union 
+*.fsproj text eol=crlf merge=union 
+*.dbproj text eol=crlf merge=union 
+*.sln text eol=crlf merge=union 
