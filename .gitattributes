@@ -15,6 +15,7 @@
 *.jpg binary
 *.png binary
 *.gif binary
+*.dll binary
 
 *.cs text eol=crlf diff=csharp
 *.vb text eol=crlf 
@@ -44,6 +45,7 @@
 *.fs text eol=crlf
 *.fsx text eol=crlf
 *.hs text eol=crlf
+*.config text eol=crlf
 
 *.csproj text eol=crlf merge=union 
 *.vbproj text eol=crlf merge=union 
